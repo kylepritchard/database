@@ -522,11 +522,10 @@ func OpenAndIndex(f string) {
 	BuildIndexes()
 }
 
-func (s *Store) AddToStore(title string, value []byte, slugTree *Tree, dateTree *Tree) {
+func AddToStore(title string, value []byte, slugTree *Tree, dateTree *Tree) {
 
 	// Generate key
-	st := *s
-	key := len(st)
+	key := len(store)
 	key++
 
 	// Date & Time
@@ -544,7 +543,7 @@ func (s *Store) AddToStore(title string, value []byte, slugTree *Tree, dateTree 
 	post.PostDate = t
 
 	//Add to store
-	st[int(key)] = post
+	store[int(key)] = post
 
 	//Add to trees
 	slugTree.Insert(key, slug)
@@ -557,7 +556,7 @@ func (s *Store) AddToStore(title string, value []byte, slugTree *Tree, dateTree 
 		log.Fatal(err)
 	}
 	enc := gob.NewEncoder(f)
-	err = enc.Encode(s)
+	err = enc.Encode(store)
 	if err != nil {
 		log.Fatal(err)
 	}
