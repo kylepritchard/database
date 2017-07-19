@@ -522,7 +522,7 @@ func OpenAndIndex(f string) {
 	BuildIndexes()
 }
 
-func AddToStore(title string, value []byte, slugTree *Tree, dateTree *Tree) {
+func AddToStore(title string, value []byte) {
 
 	// Generate key
 	key := len(store)
